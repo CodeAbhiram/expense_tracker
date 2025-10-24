@@ -18,7 +18,7 @@ connectDB();
 
 // ------------------ CORS ------------------ //
 // Allow requests from React frontend
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = ["http://localhost:3000","https://expense-tracker-3-ezv2.onrender.com"];
 
 app.use(
   cors({
