@@ -2,16 +2,20 @@ import mongoose from "mongoose";
 
 export const connectDB = async () => {
   try {
-    const db = "mongodb://localhost:27017/expense";
-    
+    // Use your environment variable for the MongoDB URI
+    const db = process.env.MONGO_URL;
+
+    if (!db) {
+      throw new Error("MONGO_URI is not defined in environment variables");
+    }
+
     console.log("Connecting to MongoDB at:", db); // DEBUG
-    const { connection } = await mongoose.connect(db, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log(`MongoDB Connected to ${connection.host}`);
+
+    const { connection } = await mongoose.connect(db);
+
+    console.log(`✅ MongoDB Connected to ${connection.host}`);
   } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
+    console.error("❌ MongoDB connection failed:", error.message);
     process.exit(1);
   }
 };
